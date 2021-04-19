@@ -9,7 +9,7 @@ public class SecBits {
     private short[] sec;
     
     public SecBits(int n) {
-        n=0;
+        sec=new short[n/16];
     }
 
 }
