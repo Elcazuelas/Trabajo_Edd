@@ -61,4 +61,12 @@ public class SecBits {
         }
         return true;
     }
+
+    public void Print(int i, int j) {
+        for (int a = 0; a < sec.length; a++) {
+            if (i <= a || j >= a) {
+                System.out.print(a + " ");
+            }
+        }
+    }
 }
