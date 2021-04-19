@@ -12,5 +12,6 @@ public class NewClass {
     public static void main(String[] args) {
         System.out.println("");
         System.out.println("como estamos uwu");
+        System.out.println("bien y tu");
     }
 }
