@@ -6,4 +6,8 @@ package Tarea1;
  */
 public class SecBits {
 
+    public SecBits(int n) {
+        n=0;
+    }
+    
 }
