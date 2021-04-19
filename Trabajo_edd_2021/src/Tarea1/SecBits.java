@@ -9,6 +9,7 @@ public class SecBits {
     private short[] sec;
     //hola que tal
     //hola cara de nalga
+    //XD
     public SecBits(int n) {
         sec=new short[n/16];
     }
