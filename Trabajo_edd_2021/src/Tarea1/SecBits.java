@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
+package Tarea1;
+
 /**
  * 
  * @author Julio Monroy - Camilo Vazques
  */
-public class NewClass {
-    public static void main(String[] args) {
-        System.out.println("");
-        System.out.println("como estamos uwu");
-        System.out.println("bien y tu");
-    }
+public class SecBits {
+
 }
