@@ -6,33 +6,48 @@ package Tarea1;
  */
 public class SecBits {
 
-    private short[] sec;// 010000000000 0000000000000000 [0 ,0 ]
+    private int[] sec;// 
 
     public SecBits(int n) { //
-        sec = new short[n / 16];
+        sec = new int[n / 32];
     }
-
+//
     public void On(int i, int j) {
-        int msk = 0x80000000;//1000000..
-        int aux=0;
-        int ms = 0x80000000; // m´ascara (en hexadecimal)
-        for (short k = 0; k < sec.length*16; k++) { //recorre 1 por 1 los bits
-            if (i <= k && j >= k) {   //busca la posicion de enmedio de los dos datos dados
-                sec[aux]=(short) (sec[aux] | msk);
-            }
-            msk=(short) (msk>>>1);
-            
-            
-            for (short l = 0; l < 16; l++) {
-            if ((ms & msk) == 0){ 
-                System.out.print("0");
-            }else {System.out.print("1");}
-        ms = (short) (ms >>> 1);
+        int msk;
         
+        if ( j/32 == i/32 ) {
+            msk = 0x80000000;
+            for (int k = 0; k <= j%32; k++) { //recorre 1 por 1 los bits
+                msk= (msk>>>1);
+            }
+        }else{
+            msk = 0xffffffff;
+            for (int k = 0; k < i%32; k++) { //recorre 1 por 1 los bits
+                msk= (msk>>>1);
+            }
+            sec[i/32]= msk | sec[i/32];
+            //para j
+            msk = 0xffffffff;
+            for (int k = 0; k < 32-(j%32); k++) { //recorre 1 por 1 los bits
+                msk= (msk << 1);
+            }
+            sec[j/32]= msk | sec[j/32];
         }
-            System.out.println("");
-            ms = (short) 0x8000;
+            
+        i        
+        
+        if (i%32 == 0 && (j+1)%32==0) {
+            msk = 0xffffffff;
+            for (int k = i/32; k < ((j+1)/32); k++) {
+                sec[k]=sec[k]|msk;
+            }
         }
+        
+        
+        /*for (short k = 0; k < 10; k++) { //recorre 1 por 1 los bits
+            sec[aux]=(short) (sec[aux] | msk);
+            msk=(short) (msk>>>1);
+        }*/
     }
 
     public void Off(int i, int j) {
@@ -85,14 +100,18 @@ public class SecBits {
         }
     }*/
     public void intTobit() {
-        short msk = (short) 0x8000; // m´ascara (en hexadecimal)
-        int aux=0;
-        for (short i = 0; i < 16; i++) {
-            if ((sec[aux] & msk) == 0){ 
-                System.out.print("0");
-            }else {System.out.print("1");}
-        msk = (short) (msk >>> 1);
-        
+        int msk; // m´ascara (en hexadecimal)
+        for (int i = 0; i < sec.length; i++) {
+            msk = 0x80000000;
+            for (short j = 0; j < 32; j++) {
+                if ((sec[i] & msk) == 0) {
+                    System.out.print("0");
+                } else {
+                    System.out.print("1");
+                }
+                msk =(msk >>> 1);
+            }
+            System.out.print("----");
         }
     }
 }
