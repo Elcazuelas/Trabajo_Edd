@@ -18,25 +18,31 @@ public class SecBits {
         if ( j/32 == i/32 ) {
             msk = 0x80000000;
             for (int k = 0; k <= j%32; k++) { //recorre 1 por 1 los bits
+                if (k>=i%32) {
+                    sec[i/32]= sec[i/32] | msk;
+                }
                 msk= (msk>>>1);
             }
+            
         }else{
-            msk = 0xffffffff;
+            msk = 0x80000000;
             for (int k = 0; k < i%32; k++) { //recorre 1 por 1 los bits
                 msk= (msk>>>1);
             }
             sec[i/32]= msk | sec[i/32];
             //para j
             msk = 0xffffffff;
-            for (int k = 0; k < 32-(j%32); k++) { //recorre 1 por 1 los bits
+            for (int k = 1; k < 32-(j%32); k++) { //recorre 1 por 1 los bits
                 msk= (msk << 1);
             }
             sec[j/32]= msk | sec[j/32];
+            
+            i=((i/32)+1)*32;
+            j=j-(j%32)-1;
         }
             
-        i        
         
-        if (i%32 == 0 && (j+1)%32==0) {
+        if (i%32 == 0 && (j+1)%32==0 && j>i) {
             msk = 0xffffffff;
             for (int k = i/32; k < ((j+1)/32); k++) {
                 sec[k]=sec[k]|msk;
