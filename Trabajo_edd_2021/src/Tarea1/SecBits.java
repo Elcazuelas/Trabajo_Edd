@@ -110,15 +110,37 @@ public class SecBits {
 
     public int SelPos(int l) {
         int cont = 0;
-        for (int a = 0; a < sec.length; a++) {
-            if (sec[a] == 1) {
+        int msk=0x80000000;
+        int aux=0;
+        int pos=-1;
+        while (cont!=l && aux<sec.length ) {            
+            if ((sec[aux] & msk) == 0) {
+                System.out.print("0");
+            }else{
+                System.out.print("akitoy,");
                 cont++;
-                if (l == cont) {
-                    return a;
-                }
+            }
+            pos++;
+            msk=(msk>>>1);
+            if (pos%32==0) {
+                msk=0x80000000;
+                aux++;
             }
         }
-        return -1;
+        return pos;
+        
+        
+        /*for (int i = 0; i < sec.length; i++) {
+            msk =0x80000000;
+            for (int j=0; j < 32 ; j++  ) {
+                if ((msk & sec[i])!= 0) {
+                    cont++;
+                    if (cont==l) {
+                        return ((i-1)*32)+j;
+                    }
+                }
+            }
+        }*/
     }
 
     public boolean SubsecuenciaSimilares(SecBits s, int i, int j) {
@@ -131,14 +153,14 @@ public class SecBits {
         }
         return true;
     }
-    /*
+    
     public void Print(int i, int j) {
         for (int a = 0; a < sec.length; a++) {
             if (i <= a || j >= a) {
                 System.out.print(a + " ");
             }
         }
-    }*/
+    }
     public void intTobit() {
         int msk; // m´ascara (en hexadecimal)
         for (int i = 0; i < sec.length; i++) {
