@@ -12,64 +12,98 @@ public class SecBits {
         sec = new int[n / 32];
     }
 //
-    public void On(int i, int j) {
-        int msk;
-        
-        if ( j/32 == i/32 ) {
-            msk = 0x80000000;
-            for (int k = 0; k <= j%32; k++) { //recorre 1 por 1 los bits
-                if (k>=i%32) {
-                    sec[i/32]= sec[i/32] | msk;
+    public void on(int i, int j) {
+        int msk = 0x80000000;
+
+        if (i % 32 == 0 && (j + 1) % 32 == 0) {
+            msk = 0xffffffff;
+            for (int k = i / 32; k < ((j + 1) / 32); k++) {
+                sec[k] = sec[k] | msk;
+            }
+        } else if (j / 32 == i / 32) {
+            for (int k = 0; k <= j % 32; k++) { //recorre 1 por 1 los bits
+                if (k >= i % 32) {
+                    sec[i / 32] = sec[i / 32] | msk;
                 }
-                msk= (msk>>>1);
+                msk = (msk >>> 1);
             }
-            
-        }else{
-            msk = 0x80000000;
-            for (int k = 0; k < i%32; k++) { //recorre 1 por 1 los bits
-                msk= (msk>>>1);
+        } else {
+            msk = 0xffffffff;
+            for (int k = 0; k < i % 32; k++) { //recorre 1 por 1 los bits
+                msk = (msk >>> 1);
             }
-            sec[i/32]= msk | sec[i/32];
+            sec[i / 32] = msk | sec[i / 32];
             //para j
             msk = 0xffffffff;
-            for (int k = 1; k < 32-(j%32); k++) { //recorre 1 por 1 los bits
-                msk= (msk << 1);
+            for (int k = 0; k < 32 - ((j+1) % 32); k++) { //recorre 1 por 1 los bits
+                msk = (msk << 1);
             }
-            sec[j/32]= msk | sec[j/32];
-            
-            i=((i/32)+1)*32;
-            j=j-(j%32)-1;
-        }
-            
-        
-        if (i%32 == 0 && (j+1)%32==0 && j>i) {
-            msk = 0xffffffff;
-            for (int k = i/32; k < ((j+1)/32); k++) {
-                sec[k]=sec[k]|msk;
+            sec[j / 32] = msk | sec[j / 32];
+
+            i = ((i / 32) + 1) * 32;
+            j = j - (j % 32) - 1;
+            if (j > i) {
+                on(i, j);
             }
         }
-        
-        
-        /*for (short k = 0; k < 10; k++) { //recorre 1 por 1 los bits
-            sec[aux]=(short) (sec[aux] | msk);
-            msk=(short) (msk>>>1);
-        }*/
     }
 
-    public void Off(int i, int j) {
-        for (int a = 0; a < sec.length; a++) {
-            if (i <= a || j >= a) {
-                sec[a] = 0;
+    public void off(int i, int j) {
+        int msk = 0x7fffffff;
+
+        if (i % 32 == 0 && (j + 1) % 32 == 0) {
+            msk = 0x00000000;
+            for (int k = i / 32; k < ((j + 1) / 32); k++) {
+                sec[k] = sec[k] & msk;
+            }
+        } else if (j / 32 == i / 32) {
+            for (int k = 0; k <= j % 32; k++) { //recorre 1 por 1 los bits
+                if (k >= i % 32) {
+                    sec[i / 32] = sec[i / 32] & msk;
+                }
+                msk = (msk >>> 1);
+            }
+        } else {
+            msk = 0xffffffff;
+            for (int k = 0; k < 32-(i % 32); k++) { //recorre 1 por 1 los bits
+                msk = (msk << 1);
+            }
+            sec[i / 32] = msk & sec[i / 32];
+            //para j
+            msk = 0xffffffff;
+            for (int k = 0; k < (j+1) % 32; k++) { //recorre 1 por 1 los bits
+                msk = (msk >>> 1);
+            }
+            sec[j / 32] = msk & sec[j / 32];
+
+            i = ((i / 32) + 1) * 32;
+            j = j - (j % 32) - 1;
+            if (j > i) {
+                off(i, j);
             }
         }
     }
 
     public int BitsOn(int j) {
+        int msk;
         int cont = 0;
-        for (int a = 0; a < sec.length; a++) {
-            if (sec[a] == 1) {
-                cont++;
+
+        msk = 0x80000000;
+        if (j / 32 == 0) {
+                for (short k = 0; k <= j % 32; k++) {
+                    if ((sec[0] & msk) != 0) {
+                        cont++;
+                    }
+                    msk = (msk >>> 1);
+                }
+        } else {
+            for (int i = 0; i <= j%32; i++) {
+                if ((sec[j/32] & msk) != 0) {
+                        cont++;
+                    }
+                    msk = (msk >>> 1);
             }
+            cont+= BitsOn(j - (j % 32) - 1);
         }
         return cont;
     }
