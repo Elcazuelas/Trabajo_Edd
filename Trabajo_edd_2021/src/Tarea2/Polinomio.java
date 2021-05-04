@@ -45,7 +45,7 @@ public class Polinomio {
         } else {
             Nodo n = cabeza;
             while (n.next != null) {
-                if (n.coef == coef || n.ex == ex) {
+                if (n.coef == coef && n.ex == ex) {
                     System.out.println("Ya existe un termino igual");
                     return;
                 }
@@ -70,7 +70,8 @@ public class Polinomio {
         Nodo n = cabeza;
         Nodo a = p.cabeza;
         Polinomio nuevo= new Polinomio();
-        while (((this.Size() > p.Size()) && (n != null)) || ((this.Size() < p.Size()) && (a != null)) || ((this.Size()==p.Size()) && ((a!=null) || (n != null)))) {
+        
+        while (n != null && a != null) {
             System.out.println("entra");
             if (n.ex==a.ex){
                 System.out.println("es igual");
@@ -86,6 +87,14 @@ public class Polinomio {
                 nuevo.AgregarTermino((n.coef), n.ex);
                 n = n.next;
             }
+        }
+        while(n!=null){
+            nuevo.AgregarTermino((n.coef), n.ex);
+            n = n.next;
+        }
+        while(a!=null){
+            nuevo.AgregarTermino((a.coef), a.ex);
+            a = a.next;
         }
         return nuevo;
     }
