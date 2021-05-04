@@ -70,7 +70,7 @@ public class Polinomio {
         Nodo n = cabeza;
         Nodo a = p.cabeza;
         Polinomio nuevo= new Polinomio();
-        while (!((this.Size() > p.Size()) && (n == null) || (this.Size() < p.Size()) && (a == null))) {
+        while (((this.Size() > p.Size()) && (n != null)) || ((this.Size() < p.Size()) && (a != null)) || ((this.Size()==p.Size()) && (a!=null))) {
             if (n.ex==a.ex){
                 nuevo.AgregarTermino((n.coef+a.coef), n.ex);
                 n = n.next;
@@ -83,6 +83,7 @@ public class Polinomio {
                 n = n.next;
             }
         }
+        return nuevo;
     }
     
     public int Size(){
