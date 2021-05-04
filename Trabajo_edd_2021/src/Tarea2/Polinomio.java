@@ -72,18 +72,14 @@ public class Polinomio {
         Polinomio nuevo= new Polinomio();
         
         while (n != null && a != null) {
-            System.out.println("entra");
             if (n.ex==a.ex){
-                System.out.println("es igual");
                 nuevo.AgregarTermino((n.coef+a.coef), n.ex);
                 n = n.next;
                 a = a.next;
-            }else if((n.ex>a.ex)||((a.ex>0)&& n==null)){
-                System.out.println("n es mayor a");
+            }else if(n.ex>a.ex){
                 nuevo.AgregarTermino((a.coef), a.ex);
                 a = a.next;
-            }else if((n.ex<a.ex)||((n.ex>0)&& a==null)){
-                System.out.println("a es mayor n");
+            }else if(n.ex<a.ex){
                 nuevo.AgregarTermino((n.coef), n.ex);
                 n = n.next;
             }

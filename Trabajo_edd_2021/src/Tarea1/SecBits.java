@@ -13,7 +13,7 @@ public class SecBits {
     }
 
     public void on(int i, int j) {
-        int msk = 0x80000000;
+        int msk;
 
         if (i % 32 == 0 && (j + 1) % 32 == 0 && j > i) {
             msk = 0xffffffff;
