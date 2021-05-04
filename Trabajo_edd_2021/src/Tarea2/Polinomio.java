@@ -66,6 +66,25 @@ public class Polinomio {
         return resultado;
     }
     
+    public Polinomio Suma(Polinomio p) {
+        Nodo n = cabeza;
+        Nodo a = p.cabeza;
+        Polinomio nuevo= new Polinomio();
+        while (!((this.Size() > p.Size()) && (n == null) || (this.Size() < p.Size()) && (a == null))) {
+            if (n.ex==a.ex){
+                nuevo.AgregarTermino((n.coef+a.coef), n.ex);
+                n = n.next;
+                a = a.next;
+            }else if((n.ex>a.ex)||((a.ex>0)&& n==null)){
+                nuevo.AgregarTermino((a.coef), a.ex);
+                a = a.next;
+            }else if((n.ex<a.ex)||((n.ex>0)&& a==null)){
+                nuevo.AgregarTermino((n.coef), n.ex);
+                n = n.next;
+            }
+        }
+    }
+    
     public int Size(){
         int i = 0;
         Nodo n = cabeza;
