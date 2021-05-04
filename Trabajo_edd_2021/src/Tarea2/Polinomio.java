@@ -27,7 +27,7 @@ public class Polinomio {
 
         //Impirmir la informacion del objeto
         public void info() {
-
+            System.out.println("-" + this.coef +"|" + this.ex);
         }
     }
 
@@ -70,15 +70,19 @@ public class Polinomio {
         Nodo n = cabeza;
         Nodo a = p.cabeza;
         Polinomio nuevo= new Polinomio();
-        while (((this.Size() > p.Size()) && (n != null)) || ((this.Size() < p.Size()) && (a != null)) || ((this.Size()==p.Size()) && (a!=null))) {
+        while (((this.Size() > p.Size()) && (n != null)) || ((this.Size() < p.Size()) && (a != null)) || ((this.Size()==p.Size()) && ((a!=null) || (n != null)))) {
+            System.out.println("entra");
             if (n.ex==a.ex){
+                System.out.println("es igual");
                 nuevo.AgregarTermino((n.coef+a.coef), n.ex);
                 n = n.next;
                 a = a.next;
             }else if((n.ex>a.ex)||((a.ex>0)&& n==null)){
+                System.out.println("n es mayor a");
                 nuevo.AgregarTermino((a.coef), a.ex);
                 a = a.next;
             }else if((n.ex<a.ex)||((n.ex>0)&& a==null)){
+                System.out.println("a es mayor n");
                 nuevo.AgregarTermino((n.coef), n.ex);
                 n = n.next;
             }
@@ -94,5 +98,13 @@ public class Polinomio {
             n = n.next;
         }
         return i;
+    }
+    
+    public void imprimir(){
+        Nodo n = cabeza;
+        while (n != null) {            
+            n.info();
+            n = n.next;
+        }
     }
 }
