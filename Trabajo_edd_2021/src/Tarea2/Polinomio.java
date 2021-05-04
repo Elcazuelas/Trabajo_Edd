@@ -65,4 +65,14 @@ public class Polinomio {
         }
         return resultado;
     }
+    
+    public int Size(){
+        int i = 0;
+        Nodo n = cabeza;
+        while (n != null) {
+            i++;
+            n = n.next;
+        }
+        return i;
+    }
 }
