@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Tarea1;
 
 /**
  * 
- * @author Julio Monroy - Camilo Vazques
+ * @author Julio Monroy - Camilo Vazques - Diego Williams
  */
 public class Test {
     public static void main(String[] args) {
@@ -27,8 +21,6 @@ public class Test {
         System.out.println(td.BitsOn(126));
         System.out.println(td.SelPos(6));
         td.Print(0, 35);
-
-        td.intTobit();
     }
 
 }
