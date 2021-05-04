@@ -10,57 +10,58 @@ package Tarea2;
  * @author ignac
  */
 public class Polinomio {
-    private class Nodo{
-        
+
+    private class Nodo {
+
         //creo nodos;
         public Nodo next;
         public float coef;
         public int ex;
-        
+
         //definir metodo constructor de la clase nodo
-        public Nodo(float coef, int ex, Nodo next){
-            this.coef=coef;
-            this.ex=ex;
-            this.next=next;
+        public Nodo(float coef, int ex, Nodo next) {
+            this.coef = coef;
+            this.ex = ex;
+            this.next = next;
         }
-        
+
         //Impirmir la informacion del objeto
-        public void info(){
-            
+        public void info() {
+
         }
     }
-    
+
     public Nodo cabeza;
-    
+
     //al iniciar se crea un polinomio vacio
-    public Polinomio(){
-        this.cabeza=null;
+    public Polinomio() {
+        this.cabeza = null;
     }
-    
-    public void AgregarTermino(float coef,int ex){
-        if(this.cabeza==null){
-            Nodo nuevo=new Nodo (coef, ex,null);
-            this.cabeza=nuevo;
-        }else{
-            Nodo n=cabeza;
-            while(n.next!=null){
-                if(n.coef==coef || n.ex==ex){
+
+    public void AgregarTermino(float coef, int ex) {
+        if (this.cabeza == null) {
+            Nodo nuevo = new Nodo(coef, ex, null);
+            this.cabeza = nuevo;
+        } else {
+            Nodo n = cabeza;
+            while (n.next != null) {
+                if (n.coef == coef || n.ex == ex) {
                     System.out.println("Ya existe un termino igual");
                     return;
                 }
-                n=n.next;
+                n = n.next;
             }
-            Nodo nuevo=new Nodo(coef, ex,null);
-            n.next=nuevo; 
+            Nodo nuevo = new Nodo(coef, ex, null);
+            n.next = nuevo;
         }
     }
-    
-    public float Evaluar(float x){
-        Nodo n=cabeza;
-        float resultado=0;
-        while(n.next!=null){
-                resultado=(float) (resultado+(n.coef *(Math.pow(x, n.ex))));
-                n=n.next;
+
+    public float Evaluar(float x) {
+        Nodo n = cabeza;
+        float resultado = 0;
+        while (n != null) {
+            resultado = (float) (resultado + (n.coef * (Math.pow(x, n.ex))));
+            n = n.next;
         }
         return resultado;
     }
