@@ -2,7 +2,7 @@ package Tarea1;
 
 /**
  *
- * @author Julio Monroy - Camilo Vazques
+ * @author Julio Monroy - Camilo Vazques - Diego Williams
  */
 public class SecBits {
 
@@ -116,38 +116,38 @@ public class SecBits {
 
     public boolean SubsecuenciaSimilares(SecBits s, int i, int j) {
         int msk;
-        int pos = i/32;
+        int pos = i / 32;
         msk = 0x80000000;
-        msk = msk >>> i%32;
-        for(int k= i%32+(i/32)*32 ; k <= (j%32)+(j/32)*32 ; k++ ){
-            if (k%32 == 0 && k!=0) {
+        msk = msk >>> i % 32;
+        for (int k = i % 32 + (i / 32) * 32; k <= (j % 32) + (j / 32) * 32; k++) {
+            if (k % 32 == 0 && k != 0) {
                 msk = 0x80000000;
                 pos++;
             }
             if ((msk & this.sec[pos]) != (msk & s.sec[pos])) {
-                    return false;
-                }
-            msk = msk>>>1;
+                return false;
+            }
+            msk = msk >>> 1;
         }
         return true;
     }
 
     public void Print(int i, int j) {
         int msk;
-        int pos = i/32;
+        int pos = i / 32;
         msk = 0x80000000;
-        msk = msk >>> i%32;
-        for(int k= i%32+(i/32)*32 ; k <= (j%32)+(j/32)*32 ; k++ ){
-            if (k%32 == 0 && k!=0) {
+        msk = msk >>> i % 32;
+        for (int k = i % 32 + (i / 32) * 32; k <= (j % 32) + (j / 32) * 32; k++) {
+            if (k % 32 == 0 && k != 0) {
                 msk = 0x80000000;
                 pos++;
             }
             if ((msk & sec[pos]) == 0) {
-                    System.out.print("0");
-                }else{
-                    System.out.print("1");
-                }
-            msk = msk>>>1;
+                System.out.print("0");
+            } else {
+                System.out.print("1");
+            }
+            msk = msk >>> 1;
         }
         System.out.println("");
     }
