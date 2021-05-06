@@ -44,7 +44,7 @@ public class TestProblema2 {
         }else{
             System.out.println("no son iguales");
         }
-        
+        */
         
         //implementacion de un arreglo de polinomios y buscar el que da el mayor valor de x
         Polinomio[] arrPoli = new Polinomio[3];
@@ -74,7 +74,6 @@ public class TestProblema2 {
             System.out.println("La poscion del arreglo con el mayor resultado al reemplazar x, es: "+ pos);
             //arrPoli[pos].imprimir();
         }
-        */
     }
     
     public static int posMayorEv(Polinomio[] arr, float x){
