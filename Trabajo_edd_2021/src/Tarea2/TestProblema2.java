@@ -1,10 +1,11 @@
 package Tarea2;
 /**
  *
- * @author Diego
+ * @author Julio Monroy - Camilo Vazques - Diego Williams
  */
-public class Test2 {
+public class TestProblema2 {
     public static void main(String[] args) {
+        /*
         //creo polinomio q
         Polinomio q = new Polinomio();
         q.AgregarTermino(10, 0);
@@ -73,6 +74,7 @@ public class Test2 {
             System.out.println("La poscion del arreglo con el mayor resultado al reemplazar x, es: "+ pos);
             //arrPoli[pos].imprimir();
         }
+        */
     }
     
     public static int posMayorEv(Polinomio[] arr, float x){

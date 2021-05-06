@@ -4,8 +4,9 @@ package Tarea1;
  * 
  * @author Julio Monroy - Camilo Vazques - Diego Williams
  */
-public class Test {
+public class TestProblema1 {
     public static void main(String[] args) {
+        /*
         //se crea un SecBits y se le prenden algunos bits 
         SecBits td=new SecBits(128);
         td.on(1, 5);
@@ -42,6 +43,7 @@ public class Test {
         }else{
             System.out.println("Las secuencias no son iguales");
         }
+        */
     }
 
 }
