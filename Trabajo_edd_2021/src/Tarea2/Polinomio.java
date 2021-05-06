@@ -25,12 +25,12 @@ public class Polinomio {
             this.next = next;
         }
 
-        //Impirmir la informacion del objeto
-        public void info() {
-            System.out.println("-" + this.coef +"|" + this.ex);
-        }
+        //metodo creado para imprimir la informacion del objeto en las pruebas
+        /*public void info() {
+            System.out.println( this.coef +"|" + this.ex);
+        }*/
     }
-
+    //atributo clase Polinomio
     public Nodo cabeza;
 
     //al iniciar se crea un polinomio vacio
@@ -95,21 +95,24 @@ public class Polinomio {
         return nuevo;
     }
     
-    public int Size(){
-        int i = 0;
-        Nodo n = cabeza;
-        while (n != null) {
-            i++;
-            n = n.next;
+    public boolean Iguales(Polinomio q){
+            Nodo nodoQ = q.cabeza;
+            Nodo nodoA = this.cabeza;
+        while(nodoA != null || nodoQ != null){
+            if (nodoQ == null || nodoA == null || nodoA.coef != nodoQ.coef || nodoA.ex != nodoQ.ex)
+                return false;
+            nodoA = nodoA.next;
+            nodoQ = nodoQ.next;
         }
-        return i;
+        return true;
     }
     
-    public void imprimir(){
+    //metodo creado para imprimir un Polinomio en la fase de pruebas
+    /*public void imprimir(){
         Nodo n = cabeza;
         while (n != null) {            
             n.info();
             n = n.next;
         }
-    }
+    }*/
 }

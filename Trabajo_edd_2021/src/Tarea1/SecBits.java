@@ -41,7 +41,7 @@ public class SecBits {
     }
 
     public void off(int i, int j) {
-        int msk = 0x7fffffff;
+        int msk;
 
         if (i % 32 == 0 && (j + 1) % 32 == 0) {
             msk = 0x00000000;
@@ -59,16 +59,14 @@ public class SecBits {
             //para j
             msk = 0xffffffff;
             msk = (msk >>> (j + 1) % 32);
-            if (j / 32 == i / 32) {
-                sec[j / 32] = msk | sec[j / 32];
-            } else {
+            
                 sec[j / 32] = msk & sec[j / 32];
                 i = ((i / 32) + 1) * 32;
                 j = j - (j % 32) - 1;
                 if (j > i) {
                     off(i, j);
                 }
-            }
+            
         }
     }
 
@@ -91,7 +89,7 @@ public class SecBits {
                 }
                 msk = (msk >>> 1);
             }
-            cont += BitsOn(j - (j % 32) - 1);
+            cont += BitsOn((j - (j % 32)) - 1);
         }
         return cont;
     }
@@ -119,17 +117,22 @@ public class SecBits {
         int pos = i / 32;
         msk = 0x80000000;
         msk = msk >>> i % 32;
-        for (int k = i % 32 + (i / 32) * 32; k <= (j % 32) + (j / 32) * 32; k++) {
-            if (k % 32 == 0 && k != 0) {
-                msk = 0x80000000;
-                pos++;
+        if (j > (s.sec.length * 32) - 1 || j > (this.sec.length * 32) - 1) {
+            return false;
+        } else {
+            for (int k = i; k <= j; k++) {
+                if (k % 32 == 0 && k != 0) {
+                    msk = 0x80000000;
+                    pos++;
+                }
+                if ((msk & this.sec[pos]) != (msk & s.sec[pos])) {
+                    return false;
+                }
+                msk = msk >>> 1;
             }
-            if ((msk & this.sec[pos]) != (msk & s.sec[pos])) {
-                return false;
-            }
-            msk = msk >>> 1;
+            return true;
         }
-        return true;
+
     }
 
     public void Print(int i, int j) {
